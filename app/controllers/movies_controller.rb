@@ -15,4 +15,11 @@ class MoviesController < ApplicationController
     @movie = Movie.new
     # default: render 'new' template
   end 
+  
+  def create
+  params.require(:movie)
+  permitted = params[:movie].permit(:title,:rating,:release_date)
+  @movie = Movie.create!(permitted)
+  redirect_to movies_path
+  end
 end
